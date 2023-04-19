@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import logo from "../assets/logo.png";
 import styles from "../styles/NavBar.module.css";
@@ -10,6 +10,21 @@ import axios from "axios";
 const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
+
+  const [expanded, setExpanded] = useState(false);
+  const ref = useRef(null)
+  useEffect(() => {
+    const handleClickedOutside = (event) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setExpanded(false)
+      }
+    }
+
+    document.addEventListener('mouseup', handleClickedOutside)
+    return () => {
+      document.removeEventListener("mouseup", handleClickedOutside)
+    }
+  }, [ref])
 
   const handleSignOut = async () => {
     try {
@@ -89,7 +104,7 @@ const NavBar = () => {
   );
 
   return (
-    <Navbar className={styles.NavBar} expand="md" fixed="top">
+    <Navbar expanded={expanded} className={styles.NavBar} expand="md" fixed="top">
       <Container>
         <NavLink to="/">
           <Navbar.Brand>
@@ -98,7 +113,11 @@ const NavBar = () => {
         </NavLink>
         {currentUser && addPostIcon}
 
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle 
+          onClick={ () => setExpanded(!expanded)}
+          aria-controls="basic-navbar-nav" 
+          ref={ref}
+        />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto text-left">
             <NavLink
