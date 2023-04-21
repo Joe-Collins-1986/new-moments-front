@@ -27,6 +27,7 @@ function PostPage() {
     };
 
     handleMount();
+    console.log("new useEffect")
   }, [id]);
 
   return (

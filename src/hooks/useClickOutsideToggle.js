@@ -3,6 +3,8 @@ import { useState, useRef, useEffect } from "react";
 const useClickOutsideToggle = () => {
     const [expanded, setExpanded] = useState(false);
     const ref = useRef(null)
+
+    
     useEffect(() => {
       const handleClickedOutside = (event) => {
         if (ref.current && !ref.current.contains(event.target)) {
