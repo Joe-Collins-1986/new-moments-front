@@ -30,7 +30,7 @@ const NavBar = () => {
         activeClassName={styles.Active}
         to="/posts/create"
     >
-        <i className="fas fa-plus-square"></i>Add Post
+        <i className="far fa-plus-square"></i>Add post
     </NavLink>
   </>
   )
@@ -58,7 +58,7 @@ const NavBar = () => {
         to="/"
         onClick={handleSignOut}
       >
-        <i className="fas fa-sign-out-alt"></i>Sign Out
+        <i className="fas fa-sign-out-alt"></i>Sign out
       </NavLink>
 
       <NavLink
@@ -92,7 +92,12 @@ const NavBar = () => {
   );
 
   return (
-    <Navbar expanded={expanded} className={styles.NavBar} expand="md" fixed="top">
+    <Navbar
+      expanded={expanded}
+      className={styles.NavBar}
+      expand="md"
+      fixed="top"
+    >
       <Container>
         <NavLink to="/">
           <Navbar.Brand>
@@ -100,11 +105,10 @@ const NavBar = () => {
           </Navbar.Brand>
         </NavLink>
         {currentUser && addPostIcon}
-
-        <Navbar.Toggle 
-          onClick={ () => setExpanded(!expanded)}
-          aria-controls="basic-navbar-nav" 
+        <Navbar.Toggle
           ref={ref}
+          onClick={() => setExpanded(!expanded)}
+          aria-controls="basic-navbar-nav"
         />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto text-left">
