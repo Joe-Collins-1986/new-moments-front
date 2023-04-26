@@ -32,7 +32,7 @@ const Comment = ({profile_id, profile_image, owner, updated_at, content, id, set
             results: prevComments.results.filter(comment => comment.id !== id),
           }))
         } catch(err) {
-          console.log(err)
+          // console.log(err)
         }
       }
 
